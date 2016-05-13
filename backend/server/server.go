@@ -1,22 +1,14 @@
 package main
 
 import (
-	"io/ioutil"
+	"bufio"
 	"net"
 	"fmt"
 )
 
-func handleConnection(conn net.Conn) {
-	// buf := make([]byte, 256)
-	// for {
-	// 	_, err := conn.Read(buf)
-	// 	if err != nil {
-	// 		conn.Close()
-	// 		return
-	// 	}
-	// 	fmt.Println(buf)
-	// }
+var fp map[string]func([]string, net.Conn)error
 
+func handleConnection(conn net.Conn) {
 	bufReader := bufio.NewReader(conn)
 
 	for {
@@ -25,7 +17,7 @@ func handleConnection(conn net.Conn) {
 			fmt.Println(err)
 			return
 		}
-
+		
 		fmt.Printf("%s", bytes)
 	}
 }

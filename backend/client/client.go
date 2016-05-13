@@ -18,11 +18,12 @@ func main() {
 	}
 	
 	initFp()
-	_ = conn
 	for {
 		reader := bufio.NewReader(os.Stdin)
 		cmd, _ := reader.ReadString('\n')
-		sendEvent(cmd, conn)
+		if len(cmd) > 1 {
+			sendEvent(cmd, conn)
+		}
 	}
 	
 
